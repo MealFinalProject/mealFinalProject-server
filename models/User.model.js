@@ -5,9 +5,21 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      // unique: true -> Ideally, should be unique, but its up to you
+      unique: true,
+      required: true
     },
-    password: String,
+    password: {
+      type: String,
+      required: true
+    },
+    avatar_url: {
+      type: String
+    },
+    avatar_public_id:{
+      type: String
+    },
+    favs_recipes: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
+    friends: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
