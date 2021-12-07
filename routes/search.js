@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const axios = require('axios');
-const {isLoggedIn} = require("../middleware/route-guard")
 
 // API
 const API_ID = process.env.API_ID
@@ -10,15 +9,40 @@ const API_KEY = process.env.API_KEY
 /* GET search recipes */
 router.get("/search", async (req, res, next) => {
     console.log(req.query)
-    console.log(res.locals)
-    const search = req.query.title
+    const search = req.query.name
     try {
         const axiosCall = await axios(
             `https://api.edamam.com/api/recipes/v2?type=public&q=${search}&app_id=${API_ID}&app_key=${API_KEY}`
         );
-        const recipesInfo = axiosCall.data; 
-        console.log(recipesInfo)
+        const apiInfo = axiosCall.data.hits; 
+        console.log(apiInfo)
+        // Get ID and push it in the object
+        const recipesInfo = apiInfo.map(element => {
+            const index = element.recipe.uri.lastIndexOf("_") + 1
+            const id = element.recipe.uri.substr(index)
+            element.recipe.id = id;
+            return element
+        })
+        // console.log(recipesInfo[0])
+        res.json(recipesInfo[0]);
       } catch (err) {
         console.log(err);
     }
 });
+
+/* GET search individual recipe  */
+router.get("/:id", async (req, res, next) => {
+    const id = req.params.id
+    try {
+        const axiosCall = await axios(
+            `https://api.edamam.com/api/recipes/v2/${id}?type=public&app_id=${API_ID}&app_key=${API_KEY}`
+        );
+        const recipesInfo = axiosCall.data.hits; 
+        console.log(recipesInfo[0])
+        res.json(recipesInfo[0]);
+      } catch (err) {
+        console.log(err);
+    }
+});
+
+module.exports = router;
