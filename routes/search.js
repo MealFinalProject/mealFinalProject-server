@@ -21,7 +21,7 @@ router.get("/search", async (req, res, next) => {
             element.recipe.id = id;
             return element
         })
-        res.json(recipesInfo[0]);
+        res.status(200).json(recipesInfo[0]);
       } catch (err) {
         console.log(err);
     }
@@ -37,7 +37,7 @@ router.get("/search/:id", async (req, res, next) => {
         const recipeInfo = axiosCall.data; 
         //Add id to api response
         recipeInfo.recipe.id = id    
-        res.json(recipeInfo);
+        res.status(200).json(recipeInfo);
       } catch (err) {
         console.log(err);
     }
