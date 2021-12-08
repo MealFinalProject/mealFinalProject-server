@@ -28,7 +28,7 @@ router.get("/search", async (req, res, next) => {
 });
 
 /* GET search individual recipe  */
-router.get("/category", async (req, res, next) => {
+router.get("/search/:id", async (req, res, next) => {
     const id = req.params.id
     try {
         const axiosCall = await axios(
@@ -44,7 +44,7 @@ router.get("/category", async (req, res, next) => {
 });
 
 /* GET search category   */
-router.get("/search/:id", async (req, res, next) => {
+router.get("/category", async (req, res, next) => {
     const category = req.query.category
     try {
         const axiosCall = await axios(
