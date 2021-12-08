@@ -91,4 +91,24 @@ router.get("/fastrecipes", async (req, res, next) => {
 // Cocktail
 // https://api.edamam.com/api/recipes/v2?type=public&app_id=aa72dc35&app_key=31d90debe31c5d2e3e9d132e26b9b768&health=alcohol-cocktail&random=true
 
+/* GET search cocktails   */
+router.get("/cocktails", async (req, res, next) => {
+    try {
+        const axiosCall = await axios(
+            `https://api.edamam.com/api/recipes/v2?type=public&app_id=${API_ID}&app_key=${API_KEY}&health=alcohol-cocktail&random=true`
+         );
+        const apiInfo = axiosCall.data.hits; 
+        // Get ID and push it in the object
+        const recipesInfo = apiInfo.map(element => {
+            const index = element.recipe.uri.lastIndexOf("_") + 1
+            const id = element.recipe.uri.substr(index)
+            element.recipe.id = id;
+            return element
+        })
+        res.status(200).json(recipesInfo);
+      } catch (err) {
+        console.log(err);
+    }
+});
+
 module.exports = router;
