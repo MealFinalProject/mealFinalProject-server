@@ -48,11 +48,29 @@ router.get("/search/:id", async (req, res, next) => {
 });
 
 /* GET search category   */
-router.get("/category", async (req, res, next) => {
-    const category = req.query.category
+router.get("/category/country/:name", async (req, res, next) => {
+    const category = req.params.name
+    console.log(category)
     try {
         const axiosCall = await axios(
             `https://api.edamam.com/api/recipes/v2?type=public&app_id=${API_ID}&app_key=${API_KEY}&cuisineType=${category}&random=true`
+         );
+        const apiInfo = axiosCall.data.hits; 
+        // Get ID and push it in the object
+        const recipesInfo = getId(apiInfo)
+        res.status(200).json(recipesInfo);
+      } catch (err) {
+        console.log(err);
+    }
+});
+
+/* GET search time type   */
+router.get("/category/time/:name", async (req, res, next) => {
+    const daytime = req.params.name
+    console.log(daytime)
+    try {
+        const axiosCall = await axios(
+            `https://api.edamam.com/api/recipes/v2?type=public&app_id=${API_ID}&app_key=${API_KEY}&&mealType=${daytime}&random=true`
          );
         const apiInfo = axiosCall.data.hits; 
         // Get ID and push it in the object
@@ -87,6 +105,7 @@ router.get("/fastrecipes", async (req, res, next) => {
 
 /* GET search cocktails   */
 router.get("/cocktails", async (req, res, next) => {
+    console.log("hola")
     try {
         const axiosCall = await axios(
             `https://api.edamam.com/api/recipes/v2?type=public&app_id=${API_ID}&app_key=${API_KEY}&health=alcohol-cocktail&random=true`
