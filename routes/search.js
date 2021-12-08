@@ -69,7 +69,7 @@ router.get("/category", async (req, res, next) => {
 
 
 /* GET search time below 20mins   */
-router.get("/category", async (req, res, next) => {
+router.get("/fastrecipes", async (req, res, next) => {
     const time = "1-20"
     try {
         const axiosCall = await axios(
