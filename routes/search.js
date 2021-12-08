@@ -5,6 +5,15 @@ const axios = require('axios');
 const API_ID = process.env.API_ID
 const API_KEY = process.env.API_KEY
 
+// Helpers
+const getId = (inputArray) => {
+    return inputArray.map(element => {
+        const index = element.recipe.uri.lastIndexOf("_") + 1
+        const id = element.recipe.uri.substr(index)
+        element.recipe.id = id;
+        return element
+    })
+}
 
 /* GET search recipes */
 router.get("/search", async (req, res, next) => {
@@ -15,12 +24,7 @@ router.get("/search", async (req, res, next) => {
         );
         const apiInfo = axiosCall.data.hits; 
         // Get ID and push it in the object
-        const recipesInfo = apiInfo.map(element => {
-            const index = element.recipe.uri.lastIndexOf("_") + 1
-            const id = element.recipe.uri.substr(index)
-            element.recipe.id = id;
-            return element
-        })
+        const recipesInfo = getId(apiInfo)
         res.status(200).json(recipesInfo);
       } catch (err) {
         console.log(err);
@@ -52,12 +56,7 @@ router.get("/category", async (req, res, next) => {
          );
         const apiInfo = axiosCall.data.hits; 
         // Get ID and push it in the object
-        const recipesInfo = apiInfo.map(element => {
-            const index = element.recipe.uri.lastIndexOf("_") + 1
-            const id = element.recipe.uri.substr(index)
-            element.recipe.id = id;
-            return element
-        })
+        const recipesInfo = getId(apiInfo)
         res.status(200).json(recipesInfo);
       } catch (err) {
         console.log(err);
@@ -77,12 +76,7 @@ router.get("/fastrecipes", async (req, res, next) => {
          );
         const apiInfo = axiosCall.data.hits; 
         // Get ID and push it in the object
-        const recipesInfo = apiInfo.map(element => {
-            const index = element.recipe.uri.lastIndexOf("_") + 1
-            const id = element.recipe.uri.substr(index)
-            element.recipe.id = id;
-            return element
-        })
+        const recipesInfo = getId(apiInfo)
         res.status(200).json(recipesInfo);
       } catch (err) {
         console.log(err);
@@ -99,12 +93,7 @@ router.get("/cocktails", async (req, res, next) => {
          );
         const apiInfo = axiosCall.data.hits; 
         // Get ID and push it in the object
-        const recipesInfo = apiInfo.map(element => {
-            const index = element.recipe.uri.lastIndexOf("_") + 1
-            const id = element.recipe.uri.substr(index)
-            element.recipe.id = id;
-            return element
-        })
+        const recipesInfo = getId(apiInfo)
         res.status(200).json(recipesInfo);
       } catch (err) {
         console.log(err);
