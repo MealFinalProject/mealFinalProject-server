@@ -86,7 +86,7 @@ router.get("/category/time/:name", async (req, res, next) => {
 
 
 /* GET search time below 20mins   */
-router.get("/fastrecipes", async (req, res, next) => {
+router.get("/category/fastrecipes", async (req, res, next) => {
     const time = "1-20"
     try {
         const axiosCall = await axios(
@@ -104,7 +104,7 @@ router.get("/fastrecipes", async (req, res, next) => {
 // https://api.edamam.com/api/recipes/v2?type=public&app_id=aa72dc35&app_key=31d90debe31c5d2e3e9d132e26b9b768&health=alcohol-cocktail&random=true
 
 /* GET search cocktails   */
-router.get("/cocktails", async (req, res, next) => {
+router.get("/category/cocktails", async (req, res, next) => {
     console.log("hola")
     try {
         const axiosCall = await axios(
