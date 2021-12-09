@@ -14,6 +14,14 @@ const getId = (inputArray) => {
         return element
     })
 }
+const splitMealType = (objectRecipe) => {
+    const splitted = []
+    objectRecipe.mealType.forEach(type => {
+        type.split("/").forEach(element => splitted.push(element))
+    })
+    const uniqSplitted = [... new Set(splitted)]
+    return uniqSplitted
+}
 
 /* GET search recipes */
 router.get("/search", async (req, res, next) => {
@@ -41,6 +49,8 @@ router.get("/search/:id", async (req, res, next) => {
         const recipeInfo = axiosCall.data; 
         //Add id to api response
         recipeInfo.recipe.id = id    
+        // Split mealType into different categories
+        recipeInfo.recipe.mealType = splitMealType(recipeInfo.recipe)
         res.status(200).json(recipeInfo);
       } catch (err) {
         console.log(err);
