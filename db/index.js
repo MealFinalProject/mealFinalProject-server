@@ -15,8 +15,6 @@ mongoose
 
       chalk.bgBlue(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
 
-      console.log(chalk.bgBlue`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-
     );
   })
   .catch((err) => {
