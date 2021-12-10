@@ -23,7 +23,7 @@ router.get("/session", (req, res) => {
 
   // accessToken is being sent on every request in the headers
   const accessToken = req.headers.authorization;
-
+  console.log(accessToken)
   Session.findById(accessToken)
     .populate("user")
     .then((session) => {

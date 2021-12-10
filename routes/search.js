@@ -24,8 +24,9 @@ const splitMealType = (objectRecipe) => {
 }
 
 /* GET search recipes */
-router.get("/search", async (req, res, next) => {
-    const search = req.query.name
+router.get("/search/results/:q", async (req, res, next) => {
+    const search = req.params.q
+    console.log(search)
     try {
         const axiosCall = await axios(
             `https://api.edamam.com/api/recipes/v2?type=public&q=${search}&app_id=${API_ID}&app_key=${API_KEY}`
