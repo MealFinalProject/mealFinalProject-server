@@ -14,4 +14,7 @@ res.status(200).json("profile");
 //   }
 });
 
+router.post("/profile/update", async (req, res, next) => {
+  console.log("hola")
+})
 module.exports = router;
