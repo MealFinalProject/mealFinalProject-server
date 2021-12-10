@@ -12,7 +12,9 @@ mongoose
   .connect(MONGO_URI)
   .then((x) => {
     console.log(
-      console.log(chalk.bgBlue`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+
+      chalk.bgBlue(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+
     );
   })
   .catch((err) => {
