@@ -1,7 +1,7 @@
 // ℹ️ package responsible to make the connection with mongodb
 // https://www.npmjs.com/package/mongoose
 const mongoose = require("mongoose");
-
+const chalk    = require('chalk')
 // ℹ️ Sets the MongoDB URI for our app to have access to it.
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
@@ -11,7 +11,7 @@ mongoose
   .connect(MONGO_URI)
   .then((x) => {
     console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+      chalk.bgBlue(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
     );
   })
   .catch((err) => {
