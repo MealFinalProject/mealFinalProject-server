@@ -7,7 +7,7 @@ const sessionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-      index: { expires: 1000 * 60 * 60 * 24 * 7 }, // 1 week. you can make this bigger if you want
+      index: { expires: 1000 * 60 * 60 * 24 * 1 }, // 1 day. you can make this bigger if you want
     },
   },
   {
