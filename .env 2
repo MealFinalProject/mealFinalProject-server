@@ -1,6 +1,0 @@
-PORT=5005
-SESSION_SECRET='keyboard cat'
-ORIGIN=http://localhost:3000
-MONGODB_URI = mongodb+srv://santiAdmin:12345@cluster0.9jc0c.mongodb.net/project-meal-db?retryWrites=true&w=majority
-API_KEY = 31d90debe31c5d2e3e9d132e26b9b768
-API_ID = aa72dc35
