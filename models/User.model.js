@@ -18,6 +18,7 @@ const userSchema = new Schema(
       type: String
     },
     favs_recipes: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
+    favs_recipes_idApi: [{type: String}],
     comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
   },
   {
