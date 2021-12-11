@@ -66,4 +66,17 @@ router.delete("/delete-fav-recipe", async (req, res, next) => {
   }
 });
 
+/* GET current user profile */
+router.get("/get-fav-number", async (req, res, next) => {
+    const idApiRecipe = req.headers.idApiRecipe
+    console.log("hola")
+    try {
+      const currentRecipe = await Recipe.findOne({ idApi: idApiRecipe });
+      if(!currentRecipe) res.status(200).json({numberOfLikes: 0});
+      res.status(200).json({numberOfLikes: currentRecipe.favs_users.length});
+    } catch (err) {
+      console.log(err);
+    }
+});
+
 module.exports = router;
