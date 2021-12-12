@@ -18,13 +18,15 @@ router.get("/profile", async (req, res, next) => {
 });
 
 router.post("/profile/update", async (req, res, next) => {
-  const { userId, profileImage } = req.body.data
+  const { userId, profileImage, newUsername, newPassword } = req.body.data
   console.log(req.body.data)
 
   const updateUser = await User.findByIdAndUpdate(
     userId,
-    { avatar_url: profileImage},
-  )
+    { avatar_url: profileImage,
+      username: newUsername,
+      password: newPassword,
+    },{new: true})
   console.log(updateUser)
 })
 module.exports = router;
