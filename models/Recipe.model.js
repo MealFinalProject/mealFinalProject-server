@@ -10,7 +10,7 @@ const recipeSchema = new Schema(
       type: String,
       required: true
     },
-    apiId: {
+    idApi: {
         type: String,
         required: true
     },

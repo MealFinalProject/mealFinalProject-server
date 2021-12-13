@@ -19,7 +19,7 @@ router.post("/add-new-comment", async (req, res) => {
       recipeTargeted = await Recipe.create({
         name: nameRecipe,
         photo: photoRecipe,
-        apiId: idApiRecipe,
+        idApi: idApiRecipe,
       });
     }
     // Create comment
@@ -114,7 +114,7 @@ router.get("/get-recipe-comments", async (req, res) => {
     return res.status(404).json({ errorMessage: "Recipe not found" });
   try {
     const recipeTargeted = await Recipe.findOne({
-      apiId: idApiRecipe
+      idApi: idApiRecipe
     }).populate("comments");
     if (!recipeTargeted)
       return res.status(404).json({ errorMessage: "Recipe not found" });
