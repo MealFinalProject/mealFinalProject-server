@@ -20,8 +20,10 @@ router.get("/profile", async (req, res, next) => {
     const currentUser = await User.findById(idUser);
     
     res.status(200).json(currentUser);
+
   } catch (err) {
     console.log(err);
+    return res.status(404).json({errorMessage: "Bad request: " + err});
   }
 });
 

@@ -40,7 +40,7 @@ router.post("/add-new-comment", async (req, res) => {
       { $push: { comments: newComment._id } },
       { new: true }
     );
-    return res.status(200).json({message: "Comment added"});
+    return res.status(200).json({message: "Comment added", newComment});
   } catch (err) {
     console.log(err);
     return res.status(400).json({ errorMessage: "Bad request: " + err });
