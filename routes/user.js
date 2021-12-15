@@ -27,6 +27,21 @@ router.get("/profile", async (req, res, next) => {
   }
 });
 
+router.get("/profile/my-recipes/:id", async (req, res, next) => {
+  const idUser = req.params.id
+
+  const recipesFavoritesOfUser = await User.findById(idUser).populate('favs_recipes')
+  try{
+
+    return res.status(200).json({recipesFavoritesOfUser})
+
+  } catch (err){ 
+    console.log(err)
+    return  res.status(500).json({ errorMessage: err.message })
+  }
+  
+})
+
 router.post("/profile/update", async (req, res, next) => {
   let { userId, profileImage, newUsername, newPassword, oldPassword, oldUserName, oldProfileImage } = req.body.data
   console.log(req.body.data)
@@ -84,4 +99,6 @@ router.post("/profile/update", async (req, res, next) => {
     return res.status(500).json({ errorMessage: err.message });
   }
 })
+
+
 module.exports = router;
