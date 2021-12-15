@@ -117,7 +117,7 @@ router.get("/get-recipe-comments", async (req, res) => {
       idApi: idApiRecipe
     }).populate("comments");
     if (!recipeTargeted)
-      return res.status(404).json({ errorMessage: "Recipe not found" });
+      return res.status(200).json({ comments: [] });
     if (!recipeTargeted.comments) return res.status(200).json({ comments: [] });
     return res.status(200).json({ comments: recipeTargeted.comments });
   } catch (err) {
