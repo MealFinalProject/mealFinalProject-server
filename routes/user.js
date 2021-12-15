@@ -43,8 +43,8 @@ router.get("/profile/my-recipes/:id", async (req, res, next) => {
 })
 
 router.post("/profile/update", async (req, res, next) => {
-  let { userId, profileImage, newUsername, newPassword, oldPassword, oldUserName, oldProfileImage } = req.body.data
-  console.log(req.body.data)
+  let { userId, profileImage, newUsername, newPassword, oldPassword, oldProfileImage } = req.body.data
+
   try{
 
     if(!profileImage && !newUsername && !newPassword){
@@ -59,6 +59,7 @@ router.post("/profile/update", async (req, res, next) => {
     })
     
   }
+
   let passwordHashed = oldPassword
 
     if(newPassword){
@@ -75,13 +76,7 @@ router.post("/profile/update", async (req, res, next) => {
         }
     }
 
-    if(!newUsername) newUsername = oldUserName
-
-    const userExist = await User.findOne({ username: `${newUsername}` })
-
-    if(userExist && userExist.username !== newUsername){
-      return res.status(400).json({ errorMessage: "Username already taken." })
-    }
+  
 
     if(oldProfileImage && profileImage) await cloudinary.uploader.destroy(oldProfileImage, function(result) { console.log(result) })
 
@@ -96,6 +91,8 @@ router.post("/profile/update", async (req, res, next) => {
         return res.status(200).json({msg: 'Updated user', updateUser})
   
   } catch (err) {
+    if(err.codeName === 'DuplicateKey') return res.status(500).json({ errorMessage: "Username already taken" });
+
     return res.status(500).json({ errorMessage: err.message });
   }
 })
