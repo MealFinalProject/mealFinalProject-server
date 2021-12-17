@@ -18,4 +18,12 @@ router.get("/search/users", async (req, res, next) => {
     
 })
 
+router.put("/search/users/:id" async (rea, res, next) => {
+    try{
+        return res.status(200).json('hola')
+    } catch(err){
+        return res.status(500).json({ errorMessage: err.message })
+    }
+})
+
 module.exports = router;
