@@ -42,7 +42,7 @@ router.get("/profile/my-recipes/:id", async (req, res, next) => {
   
 })
 
-router.post("/profile/update", async (req, res, next) => {
+router.put("/profile/update", async (req, res, next) => {
   let { userId, profileImage, newUsername, newPassword, oldPassword, oldProfileImage } = req.body.data
 
   try{
