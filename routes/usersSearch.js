@@ -18,7 +18,7 @@ console.log('hola')
     
 })
 
-router.put("/users/search/:id", async (req, res, next) => {
+router.put("/users/follow/:id", async (req, res, next) => {
     try{
         
         const userInSession = await User.findById(req.body.data.userInSessionId)
@@ -36,7 +36,33 @@ router.put("/users/search/:id", async (req, res, next) => {
                 { new: true } 
                )}
                
-        return res.status(200).json({msg: 'User followed'})
+        return res.status(200).json({msg: 'User followed', userInSession})
+       
+        
+    } catch(err){
+        return res.status(500).json({ errorMessage: err.message })
+    }
+})
+
+router.put("/users/unfollow/:id", async (req, res, next) => {
+    try{
+        
+        const userInSession = await User.findById(req.body.data.userInSessionId)
+        const userUnFollowed  = await User.findById(req.params.id)
+
+        if(userUnFollowed.followers.includes(userInSession._id)){
+           await userUnFollowed.updateOne(
+            { $pull: { followers: userInSession._id} },
+            { new: true } 
+           )}
+
+        if(userInSession.followed.includes(userUnFollowed._id)){
+            await userInSession.updateOne(
+                { $pull: { followed: userUnFollowed._id} },
+                { new: true } 
+               )}
+               
+        return res.status(200).json({msg: 'User unfollowed', userInSession})
        
         
     } catch(err){
