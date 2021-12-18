@@ -3,14 +3,14 @@ const router = require("express").Router();
 const { json } = require("express");
 const User = require("../models/User.model");
 
-router.get("/search/users", async (req, res, next) => {
+router.get("/users/search", async (req, res, next) => {
     try{
         let allUsers = await User
         .find()
         .select('username avatar_url')
-
+console.log('hola')
         return res.status(200).json(allUsers)
-
+        
     } catch(err){
 
         return res.status(500).json({ errorMessage: err.message })
@@ -18,8 +18,9 @@ router.get("/search/users", async (req, res, next) => {
     
 })
 
-router.put("/search/users/:id" async (rea, res, next) => {
+router.put("/users/search/:id", async (req, res, next) => {
     try{
+
         return res.status(200).json('hola')
     } catch(err){
         return res.status(500).json({ errorMessage: err.message })
