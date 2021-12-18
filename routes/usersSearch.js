@@ -20,8 +20,25 @@ console.log('hola')
 
 router.put("/users/search/:id", async (req, res, next) => {
     try{
+        
+        const userInSession = await User.findById(req.body.data.userInSessionId)
+        const userFollowed  = await User.findById(req.params.id)
 
-        return res.status(200).json('hola')
+        if(!userFollowed.followers.includes(userInSession._id)){
+           await userFollowed.updateOne(
+            { $push: { followers: userInSession._id} },
+            { new: true } 
+           )}
+
+        if(!userInSession.followed.includes(userFollowed._id)){
+            await userInSession.updateOne(
+                { $push: { followed: userFollowed._id} },
+                { new: true } 
+               )}
+               
+        return res.status(200).json({msg: 'User followed'})
+       
+        
     } catch(err){
         return res.status(500).json({ errorMessage: err.message })
     }
