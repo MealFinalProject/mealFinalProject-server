@@ -21,22 +21,24 @@ console.log('hola')
 router.put("/users/follow/:id", async (req, res, next) => {
     try{
         
-        const userInSession = await User.findById(req.body.data.userInSessionId)
-        const userFollowed  = await User.findById(req.params.id)
-
+        let userInSession   = await User.findById(req.body.data.userInSessionId)
+        let userFollowed  = await User.findById(req.params.id)
+       
         if(!userFollowed.followers.includes(userInSession._id)){
-           await userFollowed.updateOne(
+            userFollowed = await User.findByIdAndUpdate(
+            userFollowed._id,
             { $push: { followers: userInSession._id} },
             { new: true } 
            )}
 
         if(!userInSession.followed.includes(userFollowed._id)){
-            await userInSession.updateOne(
+            userInSession =  await User.findByIdAndUpdate(
+            userInSession._id,
                 { $push: { followed: userFollowed._id} },
                 { new: true } 
-               )}
-               
-        return res.status(200).json({msg: 'User followed', userInSession})
+               )
+               return res.status(200).json({msg: 'User followed', userInSession})}
+        
        
         
     } catch(err){
@@ -47,17 +49,19 @@ router.put("/users/follow/:id", async (req, res, next) => {
 router.put("/users/unfollow/:id", async (req, res, next) => {
     try{
         
-        const userInSession = await User.findById(req.body.data.userInSessionId)
-        const userUnFollowed  = await User.findById(req.params.id)
+        let userInSession   = await User.findById(req.body.data.userInSessionId)
+        let userUnFollowed  = await User.findById(req.params.id)
 
         if(userUnFollowed.followers.includes(userInSession._id)){
-           await userUnFollowed.updateOne(
+            userUnFollowed = await User.findByIdAndUpdate(
+            userUnFollowed._id,
             { $pull: { followers: userInSession._id} },
             { new: true } 
            )}
 
         if(userInSession.followed.includes(userUnFollowed._id)){
-            await userInSession.updateOne(
+            userInSession = await User.findByIdAndUpdate(
+                userInSession._id,
                 { $pull: { followed: userUnFollowed._id} },
                 { new: true } 
                )}
