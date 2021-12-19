@@ -9,7 +9,7 @@ const chalk    = require('chalk')
 const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/mealFinalProject";
 
 mongoose
-  .connect('mongodb+srv://Aaron-Lopez:12345@cluster0.7ywow.mongodb.net/mealProyect?retryWrites=true&w=majority')
+  .connect(MONGO_URI)
   .then((x) => {
     console.log(
 
