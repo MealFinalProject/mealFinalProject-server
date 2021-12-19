@@ -70,4 +70,20 @@ router.put("/users/unfollow/:id", async (req, res, next) => {
     }
 })
 
+router.get("/user/:id", async (req,res,next) =>{
+    if(!req.params || !req.params.id) return res.status(400).json({ errorMessage: "Bad Request" });
+    const userId = req.params.id
+    try{
+        const targetedUser = await User.findById(userId).select('username avatar_url favs_recipes favs_recipes_idApi followers followed')
+        .populate("favs_recipes")
+        if(!targetedUser) return res.status(404).json({errorMessage: "User not found"})
+        return res.status(200).json(targetedUser)
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json({ errorMessage: "Bad request: " + err });
+    }
+})
+
+
+
 module.exports = router;
