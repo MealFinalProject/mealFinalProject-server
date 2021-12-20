@@ -17,7 +17,7 @@ router.get("/profile", async (req, res, next) => {
   const idUser = req.headers.id
   
   try {
-    const currentUser = await User.findById(idUser);
+    const currentUser = await User.findById(idUser).populate('followed followers');
     
     res.status(200).json(currentUser);
 

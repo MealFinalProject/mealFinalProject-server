@@ -20,8 +20,8 @@ const userSchema = new Schema(
     favs_recipes: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
     favs_recipes_idApi: [{type: String}],
     comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-    followers: [{type: String}],
-    followed: [{type: String}]
+    followers: [{type: Schema.Types.ObjectId,  ref: 'User'}],
+    followed: [{type: Schema.Types.ObjectId,  ref: 'User'}]
   },
   {
     timestamps: true,

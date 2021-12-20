@@ -8,7 +8,6 @@ router.get("/users/search", async (req, res, next) => {
         let allUsers = await User
         .find()
         .select('username avatar_url')
-console.log('hola')
         return res.status(200).json(allUsers)
         
     } catch(err){
@@ -79,7 +78,7 @@ router.get("/user/:id", async (req,res,next) =>{
     const userId = req.params.id
     try{
         const targetedUser = await User.findById(userId).select('username avatar_url favs_recipes favs_recipes_idApi followers followed')
-        .populate("favs_recipes")
+        .populate("favs_recipes followers followed")
         if(!targetedUser) return res.status(404).json({errorMessage: "User not found"})
         return res.status(200).json(targetedUser)
     } catch (err) {
