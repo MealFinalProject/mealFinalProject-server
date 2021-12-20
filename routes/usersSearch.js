@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-const { json } = require("express");
 const User = require("../models/User.model");
 
 router.get("/users/search", async (req, res, next) => {
