@@ -1,0 +1,403 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "EatAtHome",
+      "description": "Ironhack final project"
+    },
+    "host": "localhost:5005",
+    "basePath": "/api",
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/users/search": {
+          "get": {
+            "tags": ["Users"],
+            "summary": "Get all users in system",
+            "responses": {
+              "200": {
+                "description": "OK"
+              }
+            }
+          }
+        },
+        "/user/{id}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get user by ID in system",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",   
+                    "required": true,
+                    "description": "The user ID"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/users/follow/{id}": {
+            "put": {
+                "tags": ["Users"],
+                "summary": "Follow user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",   
+                        "required": true,
+                        "description": "The user to be follow ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "userInSessionId",   
+                        "required": true,
+                        "description": "The user ID",
+                        "schema": {
+                            "$ref": "#/definitions/userInSessionId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/users/unfollow/{id}": {
+            "put": {
+                "tags": ["Users"],
+                "summary": "Unfollow user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",   
+                        "required": true,
+                        "description": "The user to be unfollow ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "userInSessionId",   
+                        "required": true,
+                        "description": "The user ID",
+                        "schema": {
+                            "$ref": "#/definitions/userInSessionId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/favs/get-fav-number": {
+            "get": {
+              "tags": ["Favs"],
+              "summary": "Get fav number from a recipe",
+              "parameters": [{
+                "in": "query",
+                "name": "idApiRecipe",   
+                "required": true,
+                "description": "Recipe API ID"
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/favs/add-fav-recipe": {
+            "put": {
+              "tags": ["Favs"],
+              "summary": "Add fav",
+              "parameters": [{
+                "in": "body",
+                "name": "body",   
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/UserAndRecipeInfo"
+                }
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/favs/delete-fav-recipe": {
+            "delete": {
+              "tags": ["Favs"],
+              "summary": "Delete fav",
+              "parameters": [{
+                "in": "body",
+                "name": "body",   
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/UserAndRecipe"
+                }
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/comments/add-new-comment": {
+            "post": {
+              "tags": ["Comments"],
+              "summary": "New comment",
+              "parameters": [{
+                "in": "body",
+                "name": "body",   
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/UserCommentAndRecipe"
+                }
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/comments/delete-comment": {
+            "delete": {
+              "tags": ["Comments"],
+              "summary": "Delete comment",
+              "parameters": [{
+                "in": "body",
+                "name": "body",   
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/UserAndComment"
+                }
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/comments/get-user-comments": {
+            "get": {
+              "tags": ["Comments"],
+              "summary": "Get comments from an user",
+              "parameters": [{
+                "in": "query",
+                "name": "idUser",   
+                "required": true,
+                "description": "User ID"
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/comments/get-recipe-comments": {
+            "get": {
+              "tags": ["Comments"],
+              "summary": "Get comments from a recipe",
+              "parameters": [{
+                "in": "query",
+                "name": "idApiRecipe",   
+                "required": true,
+                "description": "Recipe API ID"
+            }],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+            }
+        },
+        "/search/results/{q}": {
+            "get": {
+                "tags": ["Recipe"],
+                "summary": "Get recipes from search in API",
+                "parameters": [{
+                    "in": "path",
+                    "name": "q",   
+                    "required": true,
+                    "description": "Search text"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/search-one/{id}": {
+            "get": {
+                "tags": ["Recipe"],
+                "summary": "Get recipe by id from search in API",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",   
+                    "required": true,
+                    "description": "Id API recipe"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/category/country/{name}": {
+            "get": {
+                "tags": ["Recipe"],
+                "summary": "Get recipe by category from API",
+                "parameters": [{
+                    "in": "path",
+                    "name": "name",   
+                    "required": true,
+                    "description": "Category"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/category/time/{name}": {
+            "get": {
+                "tags": ["Recipe"],
+                "summary": "Get recipe by daytime from API",
+                "parameters": [{
+                    "in": "path",
+                    "name": "name",   
+                    "required": true,
+                    "description": "Timeday"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/category/fastrecipes": {
+            "get": {
+                "tags": ["Recipe"],
+                "summary": "Get recipe by time of execution <20mins from API",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/category/cocktails": {
+            "get": {
+                "tags": ["Recipe"],
+                "summary": "Get recipe of cocktails from API",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+      },
+      "definitions": {
+        "userInSessionId": {
+          "required": ["data"],
+          "properties": {
+            "data": {
+                "type": "object",
+                "properties": {
+                    "userInSessionId": {
+                    "type": "string"
+                    }
+                }
+            }
+          }
+        },
+        "UserAndRecipeInfo": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                  "type": "object",
+                  "properties": {
+                      "idUser": {
+                      "type": "string"
+                      },
+                      "idApiRecipe": {
+                        "type": "string"
+                      },
+                      "nameRecipe": {
+                        "type": "string"
+                      },
+                      "photoRecipe": {
+                        "type": "string"
+                      }
+                  }
+              }
+            }
+          },
+          "UserAndRecipe": {
+            "required": ["data"], 
+            "type": "object",
+            "properties": {
+                "idUser": {
+                "type": "string"
+                },
+                "idApiRecipe": {
+                "type": "string"
+                }
+            }
+            
+          },
+          "UserCommentAndRecipe": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                  "type": "object",
+                  "properties": {
+                      "idUser": {
+                      "type": "string"
+                      },
+                      "idApiRecipe": {
+                        "type": "string"
+                      },
+                      "nameRecipe": {
+                        "type": "string"
+                      },
+                      "photoRecipe": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      }
+                  }
+              }
+            }
+          },
+          "UserAndComment": {
+            "required": ["data"],
+            "type": "object",
+            "properties": {
+                "idUser": {
+                "type": "string"
+                },
+                "idComment": {
+                "type": "string"
+                }
+            }
+          }
+    }
+  }
