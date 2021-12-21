@@ -57,7 +57,7 @@ const getUser = async (userId) => {
     const targetedUser = await User.findById(userId).select('username avatar_url favs_recipes favs_recipes_idApi followers followed')
     .populate("favs_recipes followers followed")
     if(!targetedUser) return {status: 404, data: { errorMessage: "User not found" }}
-    return {status: 200, data: {targetedUser}}
+    return {status: 200, data: targetedUser}
 }
 
 module.exports = {getAllUsers, followUser, unfollowUser, getUser};
