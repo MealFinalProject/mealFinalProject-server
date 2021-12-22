@@ -8,10 +8,7 @@ EatAtHome Server
 
 ### **Overview**
 
-
-
 It is used in the [EatAtHome application](https://mealproject-client.herokuapp.com/).
-
 
 It is programmed in NodeJS, and the structure of the project is as follows:
 
@@ -21,9 +18,21 @@ It is programmed in NodeJS, and the structure of the project is as follows:
 >>- In the services folder the functionality of the methods is implemented.
 >>- Some files:
 >>>- index.js: file where the app.js is loaded. It establish the port for connections and listens to requests.
->>>- Config.js: configuration file. It contains the keys and values that can be public.
 >>>- App.js: the crossdomain is established.
 >- .gitignore file
 >- README.md file
 
 <p>&nbsp;</p>
+
+### **Getting Started**
+
+####  1. Download and installation
+
+Download the repository code with `git clone` or use download button.
+
+Run ```npm install``` to install the dependencies.
+
+#### 2. API references
+
+>- [API-DOC](https://mealproject-server.herokuapp.com/apidoc/)
+>- [SWAGGER](https://mealproject-server.herokuapp.com/swagger/)
