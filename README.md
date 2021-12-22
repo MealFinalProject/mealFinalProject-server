@@ -9,6 +9,7 @@ EatAtHome Server
 ### **Overview**
 
 It is used in the [EatAtHome application](https://mealproject-client.herokuapp.com/).
+This project is the server for [EatAtHome client](https://github.com/MealFinalProject/mealFinalProject-client)
 
 It is programmed in NodeJS, and the structure of the project is as follows:
 
