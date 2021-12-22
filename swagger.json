@@ -5,9 +5,9 @@
       "title": "EatAtHome",
       "description": "Ironhack final project"
     },
-    "host": "localhost:5005",
+    "host": "mealproject-server.herokuapp.com",
     "basePath": "/api",
-    "schemes": ["http"],
+    "schemes": ["https"],
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "paths": {
