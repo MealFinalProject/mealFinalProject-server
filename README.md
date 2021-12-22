@@ -30,7 +30,7 @@ It is programmed in NodeJS, and the structure of the project is as follows:
 
 Download the repository code with `git clone` or use download button.
 
-Run ```npm install``` to install the dependencies.
+Run ```npm install``` or ```yarn install``` to install the dependencies.
 
 #### 2. API references
 
