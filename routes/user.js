@@ -86,7 +86,6 @@ router.put("/profile/update", async (req, res, next) => {
             username: newUsername,
             password: passwordHashed,
           },{new: true})
-        console.log('UPDATEUSER',updateUser)
         
         return res.status(200).json({msg: 'Updated user', updateUser})
   
